@@ -169,7 +169,8 @@ class ReplDriver(settings: Array[String],
       else loop(using interpret(res))()
     }
 
-    try runBody { loop() }
+    val initialState: State= interpret(ParseResult("val d = 5"))
+    try runBody { loop(using initialState)() }
     finally terminal.close()
   }
 
